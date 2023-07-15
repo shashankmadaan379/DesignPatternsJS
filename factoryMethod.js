@@ -1,4 +1,4 @@
-//Types of Employees----> These are the products
+//Types of Employees---->       These are the products
 class FullTime{
     salary=20000;
     // workTime=12
