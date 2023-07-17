@@ -2,30 +2,45 @@
 // together. It acts as a bridge between two incompatible interfaces, enabling them to collaborate without modifying
 // their existing code.
 
-// Existing code using the weather service
-class WeatherService {
-  constructor(apikey) {
-    this.apikey = apikey;
+class XMLData {
+  constructor(xmlData) {
+    this.xmlData = xmlData;
   }
-  getWeather(latitude, longitude) {
-    // Call weather service API with decimal coordinates
-    console.log(`Fetching weather data for ${latitude}, ${longitude}`);
-    // ...
+
+  getXMLData() {
+    return this.xmlData;
   }
 }
 
-// New weather service with a different coordinate format
-class NewWeatherService {
-  constructor(apikey) {
-    this.apikey = apikey;
+class DataAnalyticsTool {
+  constructor(jsonData) {
+    this.jsonData = jsonData;
   }
-  getWeatherByDegress(latitudeDegrees, longitudeDegrees) {
-    // Call new weather service API with degree coordinates
+  analyseData() {
+    console.log("Analysing Data", this.jsonData);
+  }
+}
+class Adapter extends DataAnalyticsTool {
+  constructor(xmlData) {
+    super();
+    this.xmlData = xmlData;
+  }
+  analyseData() {
     console.log(
-      `Fetching weather data for ${latitudeDegrees}°, ${longitudeDegrees}°`
+      "Converting xml data",
+      this.xmlData.getXMLData(),
+      "to json data"
     );
-    // ...
+    console.log("Analysing converting Data");
+  }
+}
+class Client {
+  processData(tool) {
+    tool.analyseData();
   }
 }
 
-// Adapter to make the new weather service compatible with the existing code
+const xmlData = new XMLData("Sample XML Data");
+const tool = new Adapter(xmlData);
+const client = new Client();
+client.processData(tool);
