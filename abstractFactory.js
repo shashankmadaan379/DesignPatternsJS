@@ -79,6 +79,8 @@ class GUIAbstractFactory {
   }
 }
 
+
+
 // Client Code
 function createUI(guiFactory, osType) {
   const factory = guiFactory.CreateFactory(osType);
@@ -90,3 +92,5 @@ function createUI(guiFactory, osType) {
 const guiFactory = new GUIAbstractFactory();
 createUI(guiFactory, "windows");
 createUI(guiFactory, "mac");
+
+console.log("Hello world!");
